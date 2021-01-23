@@ -9,49 +9,26 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/style.css">
 
-    <title>Register</title>
+    <title>Log In</title>
 </head>
 <body>
-    
-    
-    <div class="container" id="log-reg">
-        {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-        <h2>Register</h2>
-        <form class="jumbotron" action="register" method="POST">
-            {% csrf_token %}
+    <div class="container">
+        <p style="font-weight: bold;"><a href="/">Back</a></p>
+        <form action="home_page" method="POST">
+        {% csrf_token %}
             <div class="form-group">
-                <label for="first_name">First Name</label>
-                <input type="text" name="first_name" id="first_name" class="form-control">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
-                <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" id="last_name" class="form-control">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="confirm">Confirm Password</label>
-                <input type="password" name="confirm" id="confirm" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-            <p style="font-weight: bold;"><a href="log_in">Already have an account? Login</a></p>
-            <p style="font-weight: bold;"><a href="/">Back</a></p>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    
-</body>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
