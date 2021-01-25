@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import User, Deity
+import bcrypt
 
 #start render functions
 def index(request):
@@ -10,7 +11,11 @@ def log_in_page_render(request):
     return render(request, "log_in_page.html")
 
 def home_page_render(request):
-    return render(request, "home_page.html")
+    context = {
+        "user": User.objects.get(id = request.session['user_id']),
+        "deity": Deity.objects.all(),
+    }
+    return render(request, "home_page.html", context)
 
 def register_page_render(request):
     return render(request, "register_page.html")
@@ -54,14 +59,14 @@ def register(request):
 
 def login(request):
     if request.method == "GET":
-        return redirect('register_page')
+        return redirect('log_in')
     if not User.objects.authenticate(request.POST['email'], request.POST['password']):
         messages.error(request, 'Invalid Email/Password')
-        return redirect('register_page')
+        return redirect('log_in')
     user = User.objects.get(email=request.POST['email'])
     request.session['user_id'] = user.id
     messages.success(request, "You have successfully logged in!")
-    return redirect('home_page')
+    return redirect('/home_page')
 
 def logout(request):
     request.session.clear()

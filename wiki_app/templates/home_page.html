@@ -44,24 +44,35 @@
     </nav>
 
     <div class="container container-fluid">
-        <p>Diety Name(culture/relgion)</p>
-            <p>{{Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nostrum odio, voluptate earum ipsam, tempora iure sapiente cupiditate dicta vitae minima? Itaque doloremque magnam excepturi nihil unde quaerat eum nemo!</p><br>
-
-            <p>Diety Name(culture/relgion)</p>
-            <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nostrum odio, voluptate earum ipsam, tempora iure sapiente cupiditate dicta vitae minima? Itaque doloremque magnam excepturi nihil unde quaerat eum nemo!</p><br>
+        <p>Welcome {{user.first_name}}!</p>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, iure, at hic dolorem inventore accusantium porro alias molestias eveniet temporibus voluptas sequi animi impedit repudiandae laudantium fuga corrupti iusto magnam. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error harum nesciunt minima asperiores deleniti eos eaque, vel quidem voluptatem dolorum doloribus fugit officia dicta, animi obcaecati numquam molestias dolorem assumenda.
+        <div class="container p-3 my-3 border">
+            <div class="row">
+                <div style="border-style: solid;" class="col">
+                    {% for deity in deity %}
+                    <ul>
+                        <li>{{deity.location}}</li>
+                    </ul>
+                {% endfor %}
+                </div>
+                <div class="col-6">
+                {% for deity in deity %}
+                    <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
+                    <p style="text-indent: 50px">{{deity.description}}</p>
+                    <p><u>Pop Culture References:</u> {{deity.pop_culture}}</p>
+                    <p><u>Contributor:</u> {{deity.contributor.first_name}} {{deity.contributor.last_name}}</p>
+                    <p><u>Sources</u>: <i>{{deity.source}}</i></p>
+                <hr style="border: 1px solid black;">
+                {% endfor %}
+                </div>
+                <div style="border-style: solid;" class="col">
+                {% for deity in deity %}
+                    <ul>
+                        <li>{{deity.religion}}</li>
+                    </ul>
+                {% endfor %}
+                </div>
             </div>
-            <div class="col-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus eveniet quisquam, ex odit explicabo enim cum ipsa deserunt minima? Fugiat qui similique deserunt, odio dolor ipsam ex non eum quae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates illo, explicabo harum deleniti excepturi corrupti eaque mollitia fuga laborum unde tempora, eveniet dolores, itaque adipisci eligendi exercitationem soluta repellat eius!
-            </div>
-            <div class="col">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus architecto quasi repudiandae obcaecati dignissimos sunt ducimus doloribus rerum, accusamus, tempore quia harum itaque nemo dicta? Molestiae eligendi sunt recusandae dolore! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum, saepe. Ea corrupti optio doloribus nulla, aspernatur repudiandae nobis praesentium iure magnam alias minus error enim placeat! Incidunt eligendi animi dolores?
-            </div>
-        </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
