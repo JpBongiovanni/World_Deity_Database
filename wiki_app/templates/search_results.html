@@ -3,12 +3,12 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+{% load static %}
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="static/css/bootstrap.min.css">
-<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{% static '/css/style.css' %}">
 
-<title>Home Page</title>
+<title>Search Results</title>
 <body>
     <nav class="navbar navbar-expand-lg navbar-inverse bg-dark">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/home_page">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -36,16 +36,16 @@
                     <a class="nav-link" href="logout">Log Out</a>
                 </li>
             </ul>
-        <form class="form-inline my-2 my-lg-0" action="searchbar/" method="POST">
-            {% csrf_token %}
-            <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+            <form class="form-inline my-2 my-lg-0" action="searchbar/" method="POST">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
     </nav>
 
     <div class="container container-fluid">
-        <p>Welcome {{user.first_name}}!</p>
+        <h1>Results for {{ user.name }}</h1>
     </div>
         <div class="container p-3 my-3 border">
             <div class="row">
@@ -57,7 +57,7 @@
                 {% endfor %}
                 </div>
                 <div class="col-6">
-                {% for deity in deity %}
+                {% for deity in deity|first %}
                     <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
                     <p style="text-indent: 50px">{{deity.description}}</p>
                     <p><u>Pop Culture References:</u> {{deity.pop_culture}}</p>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import User, Deity
+from urllib.parse import parse_qs
 import bcrypt
 
 #start render functions
@@ -71,3 +72,17 @@ def login(request):
 def logout(request):
     request.session.clear()
     return redirect('/')
+
+def searchbar(request):
+    if request.method == "POST":
+        search = request.POST["search"],
+
+        deity = Deity.objects.filter(name=search[0]),
+    
+        print(search[0])
+        context = {
+            "user": User.objects.get(id = request.session['user_id']),
+            "deity": deity,
+        }
+        print(context['deity'])
+        return render(request, 'search_results.html', context)
