@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import User, Deity
 from urllib.parse import parse_qs
 import bcrypt
+from django.db.models import Q
 
 #start render functions
 def index(request):
@@ -31,7 +32,10 @@ def top_ten_page(request):
     return render(request, "top_ten_page.html")
 
 def user_profile_page(request, user_id):
-    return render(request, "user_profile_page.html")
+    context = {
+        "user": User.objects.get(id=user_id)
+    }
+    return render(request, "user_profile_page.html", context)
     # doublecheck this one
 
 def add_entry_page(request):
@@ -74,15 +78,33 @@ def logout(request):
     return redirect('/')
 
 def searchbar(request):
-    if request.method == "POST":
-        search = request.POST["search"],
+    if request.method == "GET":
+        search = request.GET["search"],
+        print(search[0]),
+        deity = Deity.objects.filter(Q(name__contains=search[0])|Q(location__contains=search[0])|Q(alt_name__contains=search[0])|Q(culture__contains=search[0])|Q(religion__contains=search[0])|Q(description__contains=search[0])|Q(pop_culture__contains=search[0])),
 
-        deity = Deity.objects.filter(name=search[0]),
-    
-        print(search[0])
         context = {
             "user": User.objects.get(id = request.session['user_id']),
             "deity": deity,
+            "search": search[0],
         }
         print(context['deity'])
         return render(request, 'search_results.html', context)
+
+
+# def searchbar(request):
+#     if request.method == "POST":
+#         search = request.POST["search"],
+
+#         deity = Deity.objects.filter(name=search[0]),
+    
+#         print(search[0])
+#         context = {
+#             "user": User.objects.get(id = request.session['user_id']),
+#             "deity": deity,
+#         }
+#         print(context['deity'])
+#         return render(request, 'search_results.html', context)
+
+# Deity.objects.filter(Q(name__contains="a")|Q(location__contains="i"))
+# Out[12]: <QuerySet [<Deity: Deity object (1)>, <Deity: Deity object (2)>, <Deity: Deity object (3)>, <Deity: Deity object (4)>]>

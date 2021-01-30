@@ -36,7 +36,7 @@
                     <a class="nav-link" href="logout">Log Out</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="searchbar/" method="POST">
+            <form class="form-inline my-2 my-lg-0" action="" method="GET">
                 {% csrf_token %}
                 <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search">
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
@@ -45,7 +45,7 @@
     </nav>
 
     <div class="container container-fluid">
-        <h1>Results for {{ user.name }}</h1>
+        <h1>Results for "{{search}}"</h1>
     </div>
         <div class="container p-3 my-3 border">
             <div class="row">

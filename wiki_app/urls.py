@@ -16,5 +16,5 @@ urlpatterns = [
     path('register', views.register),
     path('logout', views.logout),
     path('login', views.login),
-    path('searchbar/', views.searchbar),
+    path('searchbar', views.searchbar),
 ]
