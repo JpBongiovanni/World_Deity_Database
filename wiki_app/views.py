@@ -91,20 +91,23 @@ def searchbar(request):
         print(context['deity'])
         return render(request, 'search_results.html', context)
 
-
-# def searchbar(request):
-#     if request.method == "POST":
-#         search = request.POST["search"],
-
-#         deity = Deity.objects.filter(name=search[0]),
-    
-#         print(search[0])
-#         context = {
-#             "user": User.objects.get(id = request.session['user_id']),
-#             "deity": deity,
-#         }
-#         print(context['deity'])
-#         return render(request, 'search_results.html', context)
-
-# Deity.objects.filter(Q(name__contains="a")|Q(location__contains="i"))
-# Out[12]: <QuerySet [<Deity: Deity object (1)>, <Deity: Deity object (2)>, <Deity: Deity object (3)>, <Deity: Deity object (4)>]>
+def add_deity(request):
+    errors = Deity.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/add_entry_page')
+    else:
+        User.objects.get(id=request.session['user_id']),
+        Deity.objects.create(
+            name = request.POST['name'],
+            contributor = User.objects.get(id = request.session['user_id']),
+            alt_name = request.POST['alt_name'],
+            culture = request.POST['culture'],
+            location = request.POST['location'],
+            religion = request.POST['religion'],
+            description = request.POST['description'],
+            pop_culture = request.POST['pop_culture'],
+            source = request.POST['source']
+        )
+    return redirect('/home_page')

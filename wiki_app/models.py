@@ -46,6 +46,36 @@ class UserManager(models.Manager):
             password = pw,
         )
 
+class DeityManager(models.Manager):
+    def basic_validator(self, post_data):
+        errors = {}
+
+        if len(post_data['name']) <1 or len(post_data['name']) > 30:
+            errors['name'] = 'Deity name should be between 1 and 30 characters'
+
+        if len(post_data['alt_name']) <1 or len(post_data['alt_name']) > 200:
+            errors['name'] = 'Alternative deity names should be between 1 and 200 characters'
+
+        if len(post_data['culture']) >30:
+            errors['culture'] = 'Deity culture should be no more than 30 characters'
+
+        if len(post_data['location']) >30:
+            errors['location'] = 'Deity location should be no more than 30 characters'
+
+        if len(post_data['religion']) >30:
+            errors['religion'] = 'Deity religion should be no more than 30 characters'
+
+        if len(post_data['description']) <30:
+            errors['description'] = 'Deity destription should be at least 30 characters'
+
+        if len(post_data['pop_culture']) <30:
+            errors['pop_culture'] = 'Deity pop culture reference should be no more than 30 characters'
+
+        if len(post_data['source']) <30:
+            errors['source'] = 'Deity info source should be no more than 300 characters'
+
+        return errors
+
 
 class User(models.Model):
     first_name = models.CharField(max_length=45)
@@ -56,9 +86,10 @@ class User(models.Model):
 
     objects = UserManager()
 
+
 class Deity(models.Model):
     name = models.CharField(max_length=255)
-    contributor = models.ForeignKey(User, related_name = "quotes", on_delete = models.CASCADE)
+    contributor = models.ForeignKey(User, related_name = "deity", on_delete = models.CASCADE)
     alt_name = models.CharField(max_length=255)
     culture = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
@@ -68,3 +99,11 @@ class Deity(models.Model):
     source = models.TextField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    objects = DeityManager()
+
+
+    # "Evil Eye." King of the Fomorians. The god Balor is the monster son of Buarainech and the grandson of Net."
+
+    # In the movie Hellboy: The Golden Army, the elven king is named Balor.
+
+    # Dictionary of Ancient Deities by Patricia turner & Charles Russel Coulter

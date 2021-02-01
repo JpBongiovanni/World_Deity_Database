@@ -17,4 +17,5 @@ urlpatterns = [
     path('logout', views.logout),
     path('login', views.login),
     path('searchbar', views.searchbar),
+    path('add_deity', views.add_deity),
 ]

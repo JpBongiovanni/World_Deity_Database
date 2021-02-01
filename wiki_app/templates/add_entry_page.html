@@ -9,12 +9,51 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/style.css">
 
-    <title>Welcome</title>
+    <title>Add to Database</title>
 </head>
     <body>
         <div class="container">
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
             <div class="jumbotron">
-                
+                <form class="jumbotron" action="add_deity" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Deity Name</label>
+                        <input type="text" name="name" id="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="alt_name">Also Known As</label>
+                        <input type="text" name="alt_name" id="alt_name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="culture">Culture</label>
+                        <input type="text" name="culture" id="culture" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" name="location" id="location" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="religion">Religion</label>
+                        <input type="text" name="religion" id="religion" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description of Deity</label>
+                        <textarea type="description" name="description" id="description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="pop_culture">Notable pop culture references</label>
+                        <textarea type="pop_culture" name="pop_culture" id="pop_culture" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="source">Sources</label>
+                        <textarea type="source" name="source" id="source" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Deity to Database</button>
+                    <p style="font-weight: bold;"><a href="/">Cancel</a></p>
+                </form>
             </div>
         </div>
 
