@@ -45,6 +45,12 @@ def deity_info_page(request, deity_id):
     return render(request, "deity_info_page.html")
     # doublecheck this one 
 
+def deity_edit_page(request, deity_id):
+    context = {
+        "deity": Deity.objects.get(id=deity_id)
+    }
+    return render(request, "deity_edit_page.html", context)
+
 #end render pages
 def back(request):
     return redirect("welcome_page.html")
@@ -110,4 +116,23 @@ def add_deity(request):
             pop_culture = request.POST['pop_culture'],
             source = request.POST['source']
         )
+    return redirect('/home_page')
+
+def edit_deity(request, deity_id):
+    deity = Deity.objects.get(id = deity_id)
+    errors = Deity.edits.edit_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+            return redirect(f'/deity_edit_page/{deity_id}')
+    else:
+        deity.name = request.POST['name']
+        deity.alt_name = request.POST['alt_name']
+        deity.culture = request.POST['culture']
+        deity.location = request.POST['location']
+        deity.religion = request.POST['religion']
+        deity.description = request.POST['description']
+        deity.pop_culture = request.POST['pop_culture']
+        deity.source = request.POST['source']
+        deity.save()
     return redirect('/home_page')

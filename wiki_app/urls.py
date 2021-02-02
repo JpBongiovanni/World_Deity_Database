@@ -18,4 +18,6 @@ urlpatterns = [
     path('login', views.login),
     path('searchbar', views.searchbar),
     path('add_deity', views.add_deity),
+    path('deity_edit_page/<int:deity_id>', views.deity_edit_page),
+    path('edit_deity/<int:deity_id>', views.edit_deity),
 ]
