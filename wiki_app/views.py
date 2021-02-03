@@ -13,17 +13,23 @@ def log_in_page_render(request):
     return render(request, "log_in_page.html")
 
 def home_page_render(request):
+    dl = Deity.objects.order_by('location').values_list('location').distinct()
     context = {
         "user": User.objects.get(id = request.session['user_id']),
         "deity": Deity.objects.all(),
+        "dl": dl[0],
     }
     return render(request, "home_page.html", context)
 
 def register_page_render(request):
     return render(request, "register_page.html")
 
-def deities_by_location_page(request):
-    return render(request, "deities_by_location_page.html")
+def deities_by_location_page(request, deity_location):
+        context = {
+            "deity": Deity.objects.filter(location = deity_location),
+            "deity_location": deity_location,
+        }
+        return render(request, "deities_by_location_page.html", context)
 
 def deities_by_religion_page(request):
     return render(request, "deities_by_religion_page.html")

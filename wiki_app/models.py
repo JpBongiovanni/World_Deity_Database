@@ -68,8 +68,8 @@ class DeityManager(models.Manager):
         if len(post_data['description']) <30:
             errors['description'] = 'Deity destription should be at least 30 characters'
 
-        if len(post_data['pop_culture']) <5:
-            errors['pop_culture'] = 'Deity pop culture reference should be no more than 30 characters'
+        # if len(post_data['pop_culture']) <5:
+        #     errors['pop_culture'] = 'Deity pop culture reference should be no more than 30 characters'
 
         if len(post_data['source']) <10:
             errors['source'] = 'Deity info source should be no more than 300 characters'

@@ -3,12 +3,11 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+{% load static %}
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="static/css/bootstrap.min.css">
-<link rel="stylesheet" href="static/css/style.css">
-
-<title>Home Page</title>
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{% static '/css/style.css' %}">
+<title>Deities by Location</title>
 <body>
     <nav class="navbar navbar-expand-lg navbar-inverse bg-dark">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -26,7 +25,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="add_entry_page">Add Entry to Database</a>
+                        <a class="dropdown-item" href="/add_entry_page">Add Entry to Database</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
@@ -44,45 +43,23 @@
         </div>
     </nav>
 
-    <div class="container container-fluid">
-        <p>Welcome {{user.first_name}}!</p>
+    <div class="container">
+        <h1>Deities by Location: <i>{{deity_location}}</i></h1>
+        {{deity.location}}
+        {% for deity in deity %}
+            <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
+            <p style="text-indent: 50px">{{deity.description}}</p>
+            <p><u>Religion:</u> {{deity.religion}}</p>
+            <p><u>Location:</u> <a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></p>
+            <p><u>Pop Culture References:</u> {{deity.pop_culture}}</p>
+            <p><u>Contributor:</u> {{deity.contributor.first_name}} {{deity.contributor.last_name}}</p>
+            <p><u>Sources</u>: <i>{{deity.source}}</i></p>
+        {% if user.id == 6 %}
+            <a href="deity_edit_page/{{deity.id}}">Edit Entry</a>
+        {% endif %}
+    <hr style="border: 1px solid black;">
+    {% endfor %}
     </div>
-        <div class="container p-3 my-3 border">
-            <div class="row">
-                <div style="border-style: solid;" class="col">
-                    <h4>Locations</h4>
-                    {% for deity in deity %}
-                    <ul>
-                        <li><a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></li>
-                    </ul>
-                {% endfor %}
-                </div>
-                <div class="col-6">
-                {% for deity in deity %}
-                    <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
-                    <p style="text-indent: 50px">{{deity.description}}</p>
-                    <p><u>Religion:</u> {{deity.religion}}</p>
-                    <p><u>Location:</u> <a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></p>
-                    <p><u>Pop Culture References:</u> {{deity.pop_culture}}</p>
-                    <p><u>Contributor:</u> {{deity.contributor.first_name}} {{deity.contributor.last_name}}</p>
-                    <p><u>Sources</u>: <i>{{deity.source}}</i></p>
-                    {% if user.id == 6 %}
-                        <a href="deity_edit_page/{{deity.id}}">Edit Entry</a>
-                    {% endif %}
-                <hr style="border: 1px solid black;">
-                {% endfor %}
-                </div>
-                <div style="border-style: solid;" class="col">
-                <h4>Religions</h4>
-                {% for deity in deity %}
-                    <ul>
-                        <li>{{deity.religion}}</li>
-                    </ul>
-                {% endfor %}
-                </div>
-            </div>
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </body>
