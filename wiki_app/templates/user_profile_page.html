@@ -10,36 +10,26 @@
 <title>User Profile</title>
 <body>
     <nav class="navbar navbar-expand-lg navbar-inverse bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/home_page">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                    <a class="nav-link" href="/user_profile_page/{{user.id}}">User Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" href="/add_entry_page">Add Entry to Database</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log Out</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="/searchbar" method="GET">
-                {% csrf_token %}
-                <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+        <form class="form-inline my-2 my-lg-0" action="/searchbar" method="GET">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
         </div>
     </nav>
 
@@ -48,6 +38,22 @@
         <p>Full Name: {{user.first_name}} {{user.last_name}}</p><br>
         <p>User Info: {{user.about}}</p><br>
         <p>Contact Info: {{user.email}}</p>
+        <hr style="border: 1px solid black;">
+        <h2>Contributions</h2>
+        <hr style="border: 1px solid black;">
+        {% for deity in deity %}
+        <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
+        <p style="text-indent: 50px">{{deity.description}}</p>
+        <p><u>Religion:</u> {{deity.religion}}</p>
+        <p><u>Location:</u> <a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></p>
+        <p><u>Pop Culture References:</u> {{deity.pop_culture}}</p>
+        <p><u>Contributor:</u> {{deity.contributor.first_name}} {{deity.contributor.last_name}}</p>
+        <p><u>Sources</u>: <i>{{deity.source}}</i></p>
+        {% if user.id == 6 %}
+            <a href="../deity_edit_page/{{deity.id}}">Edit Entry</a>
+        {% endif %}
+    <hr style="border: 1px solid black;">
+        {% endfor %}
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

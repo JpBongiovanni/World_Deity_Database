@@ -11,26 +11,16 @@
 <title>Home Page</title>
 <body>
     <nav class="navbar navbar-expand-lg navbar-inverse bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/home_page">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="user_profile_page/{{user.id}}">User Profile</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="add_entry_page">Add Entry to Database</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="add_entry_page">Add Entry to Database</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout">Log Out</a>
@@ -45,13 +35,13 @@
     </nav>
 
     <div class="container container-fluid">
-        <p>Welcome {{user.first_name}}!</p>
+        <h1 class="display-4">Welcome {{user.first_name}}!</h1>
     </div>
         <div class="container p-3 my-3 border">
             <div class="row">
                 <div style="border-style: solid;" class="col">
                     <h4>Locations</h4>
-                    {% for deity in deity %}
+                    {% for deity in deity_sidebar_L %}
                     <ul>
                         <li><a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></li>
                     </ul>
@@ -74,9 +64,9 @@
                 </div>
                 <div style="border-style: solid;" class="col">
                 <h4>Religions</h4>
-                {% for deity in deity %}
+                {% for deity in deity_sidebar_R %}
                     <ul>
-                        <li>{{deity.religion}}</li>
+                        <li><a href="deities_by_religion/{{deity.religion}}">{{deity.religion}}</a></li>
                     </ul>
                 {% endfor %}
                 </div>

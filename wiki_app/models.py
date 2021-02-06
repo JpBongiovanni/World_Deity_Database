@@ -53,8 +53,8 @@ class DeityManager(models.Manager):
         if len(post_data['name']) <1 or len(post_data['name']) > 30:
             errors['name'] = 'Deity name should be between 1 and 30 characters'
 
-        if len(post_data['alt_name']) <1 or len(post_data['alt_name']) > 200:
-            errors['name'] = 'Alternative deity names should be between 1 and 200 characters'
+        if len(post_data['alt_name']) > 200:
+            errors['name'] = 'Alternative deity names should be no more than 200 characters'
 
         if len(post_data['culture']) >30:
             errors['culture'] = 'Deity culture should be no more than 30 characters'
@@ -65,14 +65,14 @@ class DeityManager(models.Manager):
         if len(post_data['religion']) >30:
             errors['religion'] = 'Deity religion should be no more than 30 characters'
 
-        if len(post_data['description']) <30:
-            errors['description'] = 'Deity destription should be at least 30 characters'
+        if len(post_data['description']) <10:
+            errors['description'] = 'Deity description should be at least 10 characters'
 
         # if len(post_data['pop_culture']) <5:
         #     errors['pop_culture'] = 'Deity pop culture reference should be no more than 30 characters'
 
         if len(post_data['source']) <10:
-            errors['source'] = 'Deity info source should be no more than 300 characters'
+            errors['source'] = 'Deity info source should be no less than 10 characters'
 
         return errors
 
@@ -132,8 +132,3 @@ class Deity(models.Model):
     edits = EditManager()
 
 
-    # "Evil Eye." King of the Fomorians. The god Balor is the monster son of Buarainech and the grandson of Net."
-
-    # In the movie Hellboy: The Golden Army, the elven king is named Balor.
-
-    # Dictionary of Ancient Deities by Patricia turner & Charles Russel Coulter
