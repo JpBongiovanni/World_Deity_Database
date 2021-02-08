@@ -4,6 +4,9 @@ from .models import User, Deity
 from urllib.parse import parse_qs
 import bcrypt
 from django.db.models import Q
+from django.contrib.postgres.search import SearchVector
+
+
 
 #start render functions
 def index(request):
@@ -85,10 +88,10 @@ def register(request):
 
 def login(request):
     if request.method == "GET":
-        return redirect('log_in')
+        return redirect('/log_in')
     if not User.objects.authenticate(request.POST['email'], request.POST['password']):
         messages.error(request, 'Invalid Email/Password')
-        return redirect('log_in')
+        return redirect('/log_in')
     user = User.objects.get(email=request.POST['email'])
     request.session['user_id'] = user.id
     messages.success(request, "You have successfully logged in!")
@@ -101,8 +104,6 @@ def logout(request):
 def searchbar(request):
     if request.method == "GET":
         search = request.GET["search"],
-        print(search),
-        print(search[0]),
         deity = Deity.objects.filter(Q(name__contains=search[0])|Q(location__contains=search[0])|Q(alt_name__contains=search[0])|Q(culture__contains=search[0])|Q(religion__contains=search[0])|Q(description__contains=search[0])|Q(pop_culture__contains=search[0])),
 
         context = {
