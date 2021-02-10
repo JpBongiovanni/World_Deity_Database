@@ -4,7 +4,7 @@ from .models import User, Deity
 from urllib.parse import parse_qs
 import bcrypt
 from django.db.models import Q
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
 
 
 
@@ -104,7 +104,13 @@ def logout(request):
 def searchbar(request):
     if request.method == "GET":
         search = request.GET["search"],
-        deity = Deity.objects.filter(Q(name__contains=search[0])|Q(location__contains=search[0])|Q(alt_name__contains=search[0])|Q(culture__contains=search[0])|Q(religion__contains=search[0])|Q(description__contains=search[0])|Q(pop_culture__contains=search[0])),
+        print(search)
+        print(search[0])
+        # deity = Deity.objects.filter(Q(name__icontains=search[0])|Q(location__icontains=search[0])|Q(alt_name__icontains=search[0])|Q(culture__icontains=search[0])|Q(religion__icontains=search[0])|Q(description__icontains=search[0])|Q(pop_culture__icontains=search[0])),
+
+        deity = Deity.objects.annotate(search=SearchVector('name', 'location', 'alt_name', 'culture', 'religion', 'description', 'pop_culture'),).filter(search=SearchQuery(search[0], search_type='phrase')),
+
+        
 
         context = {
             "user": User.objects.get(id = request.session['user_id']),

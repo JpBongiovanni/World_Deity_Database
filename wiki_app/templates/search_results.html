@@ -42,6 +42,7 @@
             {% for deity in deity|first %}
                 <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
                 <p style="text-indent: 50px">{{deity.description}}</p>
+                <p>Location: {{deity.location}}</p>
                 <p><u>Pop Culture References:</u> {{deity.pop_culture}}</p>
                 <p><u>Contributor:</u> {{deity.contributor.first_name}} {{deity.contributor.last_name}}</p>
                 <p><u>Sources</u>: <i>{{deity.source}}</i></p>

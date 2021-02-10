@@ -62,7 +62,7 @@ class DeityManager(models.Manager):
         if len(post_data['location']) >30:
             errors['location'] = 'Deity location should be no more than 30 characters'
 
-        if len(post_data['religion']) >30:
+        if len(post_data['religion']) >50:
             errors['religion'] = 'Deity religion should be no more than 30 characters'
 
         if len(post_data['description']) <10:
@@ -92,7 +92,7 @@ class EditManager(models.Manager):
         if len(post_data['location']) >30:
             errors['location'] = 'Deity location should be no more than 30 characters'
 
-        if len(post_data['religion']) >30:
+        if len(post_data['religion']) >50:
             errors['religion'] = 'Deity religion should be no more than 30 characters'
 
         if len(post_data['description']) <30:
