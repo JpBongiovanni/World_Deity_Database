@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'deity_database',
         'USER': 'postgres',
-        'PASSWORD': 'mbweha123',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5433',
     }

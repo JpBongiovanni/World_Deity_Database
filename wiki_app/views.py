@@ -10,7 +10,10 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 #start render functions
 def index(request):
-    return render(request, "welcome_page.html")
+    context = {
+        "deity_count": Deity.objects.count(),
+    }
+    return render(request, "welcome_page.html", context)
 
 def log_in_page_render(request):
     return render(request, "log_in_page.html")
