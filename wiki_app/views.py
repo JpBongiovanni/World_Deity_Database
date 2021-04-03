@@ -12,6 +12,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 def index(request):
     context = {
         "deity_count": Deity.objects.count(),
+        "user_count": User.objects.count(),
     }
     return render(request, "welcome_page.html", context)
 
