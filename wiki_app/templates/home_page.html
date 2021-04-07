@@ -40,7 +40,7 @@
         <div class="container p-3 my-3 border">
             <div class="row">
                 <div style="border-style: solid;" class="col">
-                    <h4>Locations</h4>
+                    <h4>Identify Deities by Locations</h4>
                     {% for deity in deity_sidebar_L %}
                     <ul>
                         <li><a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></li>
@@ -63,7 +63,7 @@
                 {% endfor %}
                 </div>
                 <div style="border-style: solid;" class="col">
-                <h4>Religions</h4>
+                <h4>Identify Deities by Religions</h4>
                 {% for deity in deity_sidebar_R %}
                     <ul>
                         <li><a href="deities_by_religion/{{deity.religion}}">{{deity.religion}}</a></li>
