@@ -13,6 +13,7 @@ def index(request):
     context = {
         "deity_count": Deity.objects.count(),
         "user_count": User.objects.count(),
+        "deity": Deity.objects.all().order_by('-created_at')[0:10]
     }
     return render(request, "welcome_page.html", context)
 

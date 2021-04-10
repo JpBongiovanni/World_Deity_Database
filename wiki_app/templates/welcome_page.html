@@ -24,6 +24,21 @@
                 <p class="mt-2"><strong>Total Entries: {{user_count}}</strong></p>
             </div>
         </div>
+        <div class="col-6">
+            {% for deity in deity %}
+                <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
+                <p style="text-indent: 50px">{{deity.description}}</p>
+                <p><u>Religion:</u> {{deity.religion}}</p>
+                <p><u>Location:</u> <a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></p>
+                <p><u>Pop Culture References:</u> {{deity.pop_culture}}</p>
+                <p><u>Contributor:</u> {{deity.contributor.first_name}} {{deity.contributor.last_name}}</p>
+                <p><u>Sources</u>: <i>{{deity.source}}</i></p>
+                {% if user.id == 1 %}
+                    <a href="deity_edit_page/{{deity.id}}">Edit Entry</a>
+                {% endif %}
+            <hr style="border: 1px solid black;">
+            {% endfor %}
+            </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
