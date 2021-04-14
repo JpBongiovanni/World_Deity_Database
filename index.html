@@ -1,1 +1,79 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="static/css/bootstrap.min.css">
+<link rel="stylesheet" href="static/css/style.css">
+
+<title>Home Page</title>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-inverse bg-dark">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home_page">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="user_profile_page/{{user.id}}">User Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add_entry_page">Add Entry to Database</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Log Out</a>
+                </li>
+            </ul>
+        <form class="form-inline my-2 my-lg-0" action="/searchbar" method="GET">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        </div>
+    </nav>
+
+    <div class="container container-fluid">
+        <h1 class="display-4">Welcome {{user.first_name}}!</h1>
+    </div>
+        <div class="container p-3 my-3 border">
+            <div class="row">
+                <div style="border-style: solid;" class="col">
+                    <h4>Identify Deities by Locations</h4>
+                    {% for deity in deity_sidebar_L %}
+                    <ul>
+                        <li><a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></li>
+                    </ul>
+                {% endfor %}
+                </div>
+                <div class="col-6">
+                {% for deity in deity %}
+                    <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
+                    <p style="text-indent: 50px">{{deity.description}}</p>
+                    <p><u>Religion:</u> {{deity.religion}}</p>
+                    <p><u>Location:</u> <a href="deities_by_location/{{deity.location}}">{{deity.location}}</a></p>
+                    <p><u>Pop Culture References:</u> {{deity.pop_culture}}</p>
+                    <p><u>Contributor:</u> {{deity.contributor.first_name}} {{deity.contributor.last_name}}</p>
+                    <p><u>Sources</u>: <i>{{deity.source}}</i></p>
+                    {% if user.id == 1 %}
+                        <a href="deity_edit_page/{{deity.id}}">Edit Entry</a>
+                    {% endif %}
+                <hr style="border: 1px solid black;">
+                {% endfor %}
+                </div>
+                <div style="border-style: solid;" class="col">
+                <h4>Identify Deities by Religions</h4>
+                {% for deity in deity_sidebar_R %}
+                    <ul>
+                        <li><a href="deities_by_religion/{{deity.religion}}">{{deity.religion}}</a></li>
+                    </ul>
+                {% endfor %}
+                </div>
+            </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>
