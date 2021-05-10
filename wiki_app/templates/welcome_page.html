@@ -24,7 +24,9 @@
                 <p class="mt-2"><strong>Total Entries: {{user_count}}</strong></p>
             </div>
         </div>
-        <div class="col-6">
+        <div class="container col-6">
+            <h3>Recent Entries</h3>
+            <hr class="my-4">
             {% for deity in deity %}
                 <P><strong>{{deity.name}}</strong> <i>{{deity.alt_name}}</i> ({{deity.culture}})</P>
                 <p style="text-indent: 50px">{{deity.description}}</p>

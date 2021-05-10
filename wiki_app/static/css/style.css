@@ -24,6 +24,10 @@ body {
   border: 4px solid black
 }
 
+.my-3 {
+  border: 2px solid black
+}
+
 .form-control{
   margin-top: 7px;
 }

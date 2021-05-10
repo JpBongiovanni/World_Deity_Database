@@ -24,7 +24,7 @@ def home_page_render(request):
     
     context = {
         "user": User.objects.get(id = request.session['user_id']),
-        "deity": Deity.objects.all().order_by('-created_at')[0:3],
+        "deity": Deity.objects.all().order_by('-created_at')[0:10],
         "deity_sidebar_L": Deity.objects.values('location').distinct().order_by('location'),
         "deity_sidebar_R": Deity.objects.values('religion').distinct().order_by('religion'),
     }
